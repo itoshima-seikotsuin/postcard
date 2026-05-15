@@ -6,13 +6,25 @@
 <title>いとしま整骨院 ポストカード</title>
 <style>
   html, body { margin: 0; padding: 0; height: 100%; background: #f5f5f7; }
-  body { display: flex; align-items: flex-start; justify-content: center; }
-  .wrap { width: 100%; padding: 16px; box-sizing: border-box; display: flex; justify-content: center; }
-  iframe { width: 100%; max-width: calc((100vh - 32px) * 94 / 142); aspect-ratio: 94 / 142; border: none; display: block; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+  body { display: flex; align-items: flex-start; justify-content: center; padding: 16px; box-sizing: border-box; }
+  .wrap {
+    width: 355.27px;
+    height: 536.69px;
+    transform-origin: top center;
+    flex-shrink: 0;
+  }
+  iframe {
+    width: 355.27px;
+    height: 536.69px;
+    border: none;
+    display: block;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap" id="wrap">
 <script>
   const params = new URLSearchParams(window.location.search);
   const gasBase = 'https://script.google.com/macros/s/AKfycbyi5CUvXLb-fjbkxHW7wl_RzEp9fU87_A0kAxmHRRDVe0GkLDAs1Ze0nB1JLp4VPY2Vtw/exec';
@@ -20,5 +32,20 @@
   document.write('<iframe src="' + gasUrl + '"></iframe>');
 </script>
 </div>
+<script>
+  function fitCard() {
+    const wrap = document.getElementById('wrap');
+    const cardW = 355.27;
+    const cardH = 536.69;
+    const availW = window.innerWidth - 32;
+    const availH = window.innerHeight - 32;
+    const scale = Math.min(availW / cardW, availH / cardH);
+    wrap.style.transform = 'scale(' + scale + ')';
+    wrap.style.marginBottom = (cardH * (scale - 1)) + 'px';
+    wrap.style.marginRight = (cardW * (scale - 1)) + 'px';
+  }
+  fitCard();
+  window.addEventListener('resize', fitCard);
+</script>
 </body>
 </html>
